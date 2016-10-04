@@ -1,0 +1,32 @@
+<!-- jQuery Version 1.11.0 -->
+<script src="/js/jquery-1.11.0.js"></script>
+
+<!-- jQuery Rating Plugin -->
+<script src="/js/jquery.barrating.min.js"></script>
+
+<script>
+var apiURL = "https://dvz7n4xawe.execute-api.us-east-1.amazonaws.com/dev/beer/rating";
+{{ range $index, $element :=  .Data.Pages }}
+  {{ if (eq .Section "beers")}}
+    $(function() {
+      var element = $('#{{ .Params.id }}');
+      // Initialize the Star Rating System
+      element.barrating({
+        theme: 'fontawesome-stars',
+        allowEmpty: true,
+        onSelect: function(value, text, event) {
+          if(event) {
+            $.post( apiURL, { beer: "{{ .Params.id }}", rating: value });
+          }
+        }
+      });
+      // Load the Rating from the server
+      $.getJSON(apiURL + "?beer={{ .Params.id }}", function( data ) {
+        console.log(data.avarageRating)
+        console.log(element)
+        element.barrating('set', Math.round(data.avarageRating));
+      });
+    });
+  {{ end }}
+{{ end }}
+</script>

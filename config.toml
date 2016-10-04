@@ -1,0 +1,6 @@
+baseurl = "http://slsbeer.com/"
+languageCode = "en-us"
+title = "Serverless Beer"
+
+[params]
+    description = "The best backend beers!"
