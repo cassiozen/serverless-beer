@@ -1,4 +1,3 @@
-baseurl = "http://slsbeer.com/"
 languageCode = "en-us"
 title = "Serverless Beer"
 
