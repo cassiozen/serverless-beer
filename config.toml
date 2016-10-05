@@ -1,3 +1,4 @@
+baseurl = "/"
 languageCode = "en-us"
 title = "Serverless Beer"
 
