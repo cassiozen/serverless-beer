@@ -5,7 +5,7 @@
 <script src="/js/jquery.barrating.min.js"></script>
 
 <script>
-var apiURL = "https://dvz7n4xawe.execute-api.us-east-1.amazonaws.com/dev/beer/rating";
+var apiURL = "https://ngesx3ul9i.execute-api.us-east-1.amazonaws.com/dev/beer/rating";
 {{ range $index, $element :=  .Data.Pages }}
   {{ if (eq .Section "beers")}}
     $(function() {
@@ -16,13 +16,13 @@ var apiURL = "https://dvz7n4xawe.execute-api.us-east-1.amazonaws.com/dev/beer/ra
         allowEmpty: true,
         onSelect: function(value, text, event) {
           if(event) {
-            $.post( apiURL, { beer: "{{ .Params.id }}", rating: value });
+            $.post( apiURL, JSON.stringify({ beer: "{{ .Params.id }}", rating: value }));
           }
         }
       });
       // Load the Rating from the server
       $.getJSON(apiURL + "?beer={{ .Params.id }}", function( data ) {
-        element.barrating('set', Math.round(data.avarageRating));
+        element.barrating('set', Math.round(data.averageRating));
       });
     });
   {{ end }}
